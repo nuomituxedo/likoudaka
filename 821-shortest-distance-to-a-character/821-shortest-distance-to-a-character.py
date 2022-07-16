@@ -12,4 +12,7 @@ class Solution:
                 last_c = i
                 for j in range (i, len(chars)):
                     res[j] = j - i
+                    # stop updating right side if see next c
+                    if chars[j] == c:
+                        continue
         return res
