@@ -33,6 +33,3 @@ dists[k] = k - i;
 }
 }
 }
-return dists;
-}
-}
