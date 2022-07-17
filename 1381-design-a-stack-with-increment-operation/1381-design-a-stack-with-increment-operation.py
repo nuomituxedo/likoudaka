@@ -3,7 +3,6 @@ class CustomStack:
     def __init__(self, maxSize: int):
         self.n = maxSize
         self.stack = []
-        self.inc = []
         
     def push(self, x: int) -> None:
         if len(self.stack) == self.n: return
