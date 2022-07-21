@@ -1,21 +1,41 @@
-if visited[x][y]: continue
-visited[x][y] = True
-image[x][y] = color
-self._fourDirections(x, y, queue, image, m, n)
+class Solution:
+def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+m = len(image)
+n = len(image[0])
+visited = [[None for _ in range(n)] for _ in range(m)]
+initialColor = image[sr][sc]
+queue = [(sr,sc)]
+while queue:
+sr, sc = queue.pop(0)
+print('current:', sr, sc)
+print('queue', queue)
+if image[sr][sc] == initialColor:
+print('update color')
+if visited[sr][sc]: continue
+visited[sr][sc] = True
+image[sr][sc] = newColor
+self._fourDirections(sr, sc, queue, image, m, n)
 return image
 def _fourDirections(self, x, y, queue, image, m, n):
+print('jojo', x, y, queue, image, m, n)
 #left
 if x > 0:
-queue.append(image[x-1][y])
+queue.append((x-1, y))
+print('left', x-1, y)
 #right
 if x < m-1:
-queue.append(image[x+1][y])
+queue.append((x+1, y))
+print('right', x+1, y)
 #top
 if y > 0:
-queue.append(image[x][y+1])
+queue.append((x, y-1))
+print('top', x, y-1)
 #bottom
 if y < n-1:
-queue.append(image[x][y-1])
+queue.append((x, y+1))
+print('bottom', x, y+1)
+print('image',image)
+​
 ​
 ​
 ​
@@ -25,14 +45,4 @@ queue.append(image[x][y-1])
 class Solution {
 public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
 int oldColor = image[sr][sc];
-if (oldColor == newColor) return image;
-Queue<int[]> q = new LinkedList<>();
-int[][] directions = new int[][]{{0,1},{1,0},{0,-1},{-1,0}};
-q.offer(new int[]{sr, sc});
-while (!q.isEmpty()){
-int[]cur = q.poll();
-image[cur[0]][cur[1]] = newColor;
-for (int[] dir : directions){
-int x = cur[0] + dir[0];
-int y = cur[1] + dir[1];
-if (x < 0 || x >= image.length || y < 0 || y >= image[0].length || image[x][y] != oldColor) continue;
+//BFS   Claire 11/2/2019
