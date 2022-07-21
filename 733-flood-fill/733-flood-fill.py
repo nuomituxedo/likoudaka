@@ -9,10 +9,7 @@ class Solution:
         
         while queue:
             sr, sc = queue.pop(0)
-            print('current:', sr, sc)
-            print('queue', queue)
             if image[sr][sc] == initialColor:
-                print('update color')
                 if visited[sr][sc]: continue
                 visited[sr][sc] = True
                 image[sr][sc] = newColor
@@ -21,22 +18,16 @@ class Solution:
             
             
     def _fourDirections(self, x, y, queue, image, m, n):
-        print('jojo', x, y, queue, image, m, n)
         
         #left
         if x > 0:
             queue.append((x-1, y))
-            print('left', x-1, y)
         #right
         if x < m-1:
             queue.append((x+1, y))
-            print('right', x+1, y)
         #top
         if y > 0:
             queue.append((x, y-1))
-            print('top', x, y-1)
         #bottom
         if y < n-1:
             queue.append((x, y+1))
-            print('bottom', x, y+1)
-        print('image',image)
