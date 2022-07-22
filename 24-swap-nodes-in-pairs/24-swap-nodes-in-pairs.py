@@ -5,15 +5,18 @@
 #         self.next = next
 class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        dummy=ListNode(0)
-        dummy.next=self._swapPairs(head)
-        return dummy.next
+        if not head or not head.next: return head
         
-    def _swapPairs(self, node):
-        if not node or not node.next: return node
-        new_head = node.next.next
-        a = node
-        b = node.next
+        #swap two nodes at a time and recursion with the next node
+        a = head #first node
+        b = head.next #second node
+        c = head.next.next #third node
+        
+        #let the first node point to the third node
+        #the third node passed in the next recursive call
+        a.next = self.swapPairs(c)
+        #let the second node point to the first node (backtracking)
         b.next = a
-        a.next = self.swapPairs(new_head)
         return b
+        
+    
