@@ -6,14 +6,11 @@
 class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
         dummy=ListNode(0)
-        dummy.next=head
-        cur=ListNode(0)
-        cur.next=self._swapPairs(head)
-        return cur.next
+        dummy.next=self._swapPairs(head)
+        return dummy.next
         
     def _swapPairs(self, node):
-        if not node: return None
-        if not node.next: return node
+        if not node or not node.next: return node
         new_head = node.next.next
         a = node
         b = node.next
