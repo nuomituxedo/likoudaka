@@ -40,28 +40,21 @@ class Solution:
                 verticalOrderTraversal[col] = newColDict
                 
                 
-        #sort the dictionary by column key
+        #Sort the dictionary by column key
         sortedTraversal = dict(sorted(verticalOrderTraversal.items(), key=lambda x:x[0]))
-        print('sortedTraversal', sortedTraversal)
-        #sort the dictionary by row key
+        
+        #Sort the dictionary by row key
         for col in sortedTraversal:
             sortedTraversal[col] = dict(sorted(sortedTraversal[col].items(), key=lambda x:x[0]))
-            print(sortedTraversal[col])
-        print('sortedTraversal2', sortedTraversal)
-        
-        #create the final result from the dictionary with sorted keys
+            
+        #Step 3: create the final result from the dictionary with sorted keys
         resultList = []
         for col in sortedTraversal.keys():
             item = []
-            #before adding the value list to resultList, remember to sort the list
-            print('col',col, sortedTraversal[col])
             for row in sortedTraversal[col]:
-                print('col row', sortedTraversal[col][row])
-                
+                #before adding the value list to resultList, remember to sort the list
                 for value in sorted(sortedTraversal[col][row]):
-                    print('value', value)
                     item.append(value)
-                    print('item', item)
             resultList.append(item)
         return resultList
         
