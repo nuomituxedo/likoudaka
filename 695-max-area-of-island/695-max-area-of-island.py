@@ -13,10 +13,9 @@ class Solution:
             
             return 1 + dfs(x-1,y) + dfs(x+1,y) + dfs(x,y-1) + dfs(x,y+1)
         
-        for i in range(0, m):
-            for j in range(0, n):
-                if grid[i][j] == 1:
-                    maxArea = max(maxArea, dfs(i, j))
+        for i, j in product(range(m), range(n)):
+            if grid[i][j] == 1:
+                maxArea = max(maxArea, dfs(i, j))
         return maxArea
                     
         
