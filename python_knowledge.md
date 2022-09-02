@@ -26,6 +26,17 @@ Sort all characters in a string:
 Reverse a list:
 	reversed_charlist = charlist[::-1]
 
+Insert at the beginning of the list:
+>>>var=7
+>>>array = [1,2,3,4,5,6]
+>>>array.insert(0,var)
+>>>array
+[7, 1, 2, 3, 4, 5, 6]
+How it works:
+
+array.insert(index, value)
+
+Insert an item at a given position. The first argument is the index of the element before which to insert, so array.insert(0, x) inserts at the front of the list, and array.insert(len(array), x) is equivalent to array.append(x).Negative values are treated as being relative to the end of the array.
 
 ## Dict:
 Check if a key exists in a dict:
@@ -100,7 +111,7 @@ Eg: leetcode 242
 
 ## Queue 
 Queue is a linear data structure that stores items in First In First Out (FIFO) manner. With a queue the least recently added item is removed first.
-There are various ways to implement a queue in Python. This article covers the implementation of queue using data structures and modules from Python library. Queue in Python can be implemented by the following ways:  
+There are various ways to implement a queue in Python. This article covers the implementation of queue using data structures and modules from Python library.Queue in Python can be implemented by the following ways: 
 * list
 * collections.deque
 * queue.Queue
@@ -131,7 +142,7 @@ print("\nQueue after removing elements")
 print(queue) >>> [ ]
 
 Implementation using collections.deque
-Queue in Python can be implemented using deque class from the collections module. Deque is preferred over list in the cases where we need quicker append and pop operations from both the ends of container, as deque provides an O(1) time complexity for append and pop operations as compared to list which provides O(n) time complexity. Instead of enqueue and deque, append() and popleft() functions are used.  
+Queue in Python can be implemented using deque class from the collections module. Deque is preferred over list in the cases where we need quicker append and pop operations from both the ends of container, as deque provides an O(1) time complexity for append and pop operations as compared to list which provides O(n) time complexity. Instead of enqueue and deque, append() and popleft() functions are used. 
 
 Python program to demonstrate queue implementation using **collections.deque**
   
@@ -159,7 +170,7 @@ print("\nQueue after removing elements")
 print(q) >>> deque([])
 
 Implementation using queue.Queue
-Queue is built-in module of Python which is used to implement a queue. queue.Queue(maxsize) initializes a variable to a maximum size of maxsize. A maxsize of zero ‘0’ means an infinite queue. This Queue follows FIFO rule.  There are various functions available in this module:   
+Queue is built-in module of Python which is used to implement a queue. queue.Queue(maxsize) initializes a variable to a maximum size of maxsize. A maxsize of zero ‘0’ means an infinite queue. This Queue follows FIFO rule. There are various functions available in this module:  
 * maxsize – Number of items allowed in the queue.
 * empty() – Return True if the queue is empty, False otherwise.
 * full() – Return True if there are maxsize items in the queue. If the queue was initialized with maxsize=0 (the default), then full() never returns True.
@@ -202,4 +213,106 @@ q.put(1)
 print("\nEmpty: ", q.empty()) >>> Empty: False
 print("Full: ", q.full()) >>> Full: False
 
+
+## map() function
+map() function returns a map object(which is an iterator) of the results after applying the given function to each item of a given iterable (list, tuple etc.)
+
+Syntax :
+
+map(fun, iter)
+Parameters :
+
+fun : It is a function to which map passes each element of given iterable.
+iter : It is a iterable which is to be mapped.
+
+NOTE : You can pass one or more iterable to the map() function.
+
+Returns :
+
+Returns a list of the results after applying the given function  
+to each item of a given iterable (list, tuple etc.) 
+
+## sortedList
+A list that keeps elements in sorted order.
+import: `from sortedcontainers import SortedList`
+Initialize:  `s = SortedList()`
+https://grantjenks.com/docs/sortedcontainers/sortedlist.html 
+
+```python
+from sortedcontainers import SortedList
+
+class Solution:
+    def thirdMax(self, nums: List[int]) -> int:
+        s = SortedList()
+        for num in nums:
+            if num not in s:
+                s.add(num)
+                if len(s) > 3:
+                    s.pop(0)
+        return s[0] if len(s) == 3 else s[-1]
+```
+
+作者：LeetCode-Solution
+链接：https://leetcode.cn/problems/third-maximum-number/solution/di-san-da-de-shu-by-leetcode-solution-h3sp/
+
+## min and max in
+```python
+a, b, c = float('-inf'), float('-inf'), float('-inf')
+```
+
+## stack
+
+## looping
+decrement: 
+
+for n in range(6,0,-1):
+    print n
+# prints [6, 5, 4, 3, 2, 1]
+
+loop though 2d array:
+for i, j in product(range(m), range(n)):
+    print (i, j)
+
+it's equivalent to 
+for i in range(m):
+    for j in range(n):
+        print(i, j)
+
+## deque
+Let’s see various Operations on deque : 
+
+append():- This function is used to insert the value in its argument to the right end of the deque.
+appendleft():- This function is used to insert the value in its argument to the left end of the deque.
+pop():- This function is used to delete an argument from the right end of the deque.
+popleft():- This function is used to delete an argument from the left end of the deque.
+
+## 2d array
+### initialize:
+visited = [[None for _ in range(n)] for _ in range(m)]
+
+## lambda
+### sort an dictionary by its keys:
+verticalOrderTraversal is a dict
+sortedTraversal = dict(sorted(verticalOrderTraversal.items(), key=lambda x:x[0]))
+
+## heapq
+In Python, library heapq provides a method nlargest, which combines the last two steps under the hood and has the same \mathcal{O}(N \log k)O(Nlogk) time complexity.
+
+e.g https://leetcode.com/problems/top-k-frequent-elements/solution/ 
+```
+from collections import Counter
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]: 
+        # O(1) time 
+        if k == len(nums):
+            return nums
+        
+        # Step 1. build hash map : character as key and frequency as value
+        # O(N) time
+        count = Counter(nums)   
+        # Step 2. build heap of top k frequent elements
+        # Step 3. convert it into an output array
+        return heapq.nlargest(k, count.keys(), key=count.get)
+```
+![](2022-08-04-08-33-52.png)
 
